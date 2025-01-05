@@ -1,0 +1,51 @@
+# dist/otelcol-ruby-tracer --config otel-col.yaml
+receivers:
+  otlp:
+    protocols:
+      http:
+
+processors:
+  resource/namespace:
+    attributes:
+    - key: service.namespace
+      value: "kmuto/ruby-otel-trace-test"
+      action: upsert
+
+  batch:
+    send_batch_size: 5000
+    send_batch_max_size: 5000
+
+  probabilistic_sampler:
+    mode: proportional
+    sampling_percentage: 10
+
+  tail_sampling:
+    # decision_wait: 30s
+    decision_wait: 10s
+    # num_traces: 50000
+    policies:
+      - name: error-spans
+        type: status_code
+        status_code:
+          status_codes: [ERROR]
+      - name: sampling
+        type: probabilistic
+        probabilistic:
+          sampling_percentage: 40
+
+exporters:
+  debug:
+    verbosity: detailed
+  otlphttp/vaxila:
+    endpoint: "https://otlp-vaxila.mackerelio.com"
+    headers:
+      Accept: "*/*"
+      "Mackerel-Api-Key": ${env:MACKEREL_APIKEY}
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      # processors: [resource/namespace, probabilistic_sampler, batch]
+      processors: [resource/namespace, tail_sampling, batch]
+      exporters: [debug, otlphttp/vaxila]
