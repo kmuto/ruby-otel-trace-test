@@ -46,6 +46,6 @@ service:
   pipelines:
     traces:
       receivers: [otlp]
-      # processors: [resource/namespace, probabilistic_sampler, batch]
-      processors: [resource/namespace, tail_sampling, batch]
+      # processors: [probabilistic_sampler, resource/namespace, batch]
+      processors: [tail_sampling, resource/namespace, batch]
       exporters: [debug, otlphttp/vaxila]

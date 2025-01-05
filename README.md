@@ -15,7 +15,7 @@ dist/otelcol-ruby-tracerが生成されます。
 ## Rubyのトレース発行プログラム
 main.rbにトレースを手動計装しています。20個の親トレースを順に実行し、その中ではそれぞれ4個の子トレースが実行されます。
 
-親トレースが8番目、16番目のとき、子トレースの2番目でエラー「Standard Error: 」を発生させるようにしています。
+親トレースが8番目、16番目のとき、子トレースの2番目でエラー「Standard Error」を発生させるようにしています。
 
 ```
 $ bundle exec ruby main.rb
@@ -35,7 +35,7 @@ Vaxila以外の別のトレーシングサービスに送るときにはexporter
 otel-col.yamlの以下のprocessorsのほうを有効にします。
 
 ```
-      processors: [resource/namespace, probabilistic_sampler, batch]
+      processors: [probabilistic_sampler, resource/namespace, batch]
 ```
 
 トレースの取捨選択の確率は以下で設定しています。
@@ -55,7 +55,7 @@ otel-col.yamlの以下のprocessorsのほうを有効にします。
 otel-col.yamlの以下のprocessorsのほうを有効にします。
 
 ```
-      processors: [resource/namespace, tail_sampling, batch]
+      processors: [tail_sampling, resource/namespace, batch]
 ```
 
 トレースの取捨選択は以下のように設定しています。
