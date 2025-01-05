@@ -47,7 +47,6 @@ def main
             sleep(0.1 + rand(0.1))
             print '.'
           end
-          # pp OpenTelemetry::Trace.current_span
         end
       end
     end
