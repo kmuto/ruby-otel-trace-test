@@ -16,13 +16,9 @@ processors:
     send_batch_max_size: 5000
 
   probabilistic_sampler:
-    mode: proportional
     sampling_percentage: 10
 
   tail_sampling:
-    # decision_wait: 30s
-    decision_wait: 10s
-    # num_traces: 50000
     policies:
       - name: error-spans
         type: status_code

@@ -42,7 +42,6 @@ otel-col.yamlの以下のprocessorsのほうを有効にします。
 
 ```
   probabilistic_sampler:
-    mode: proportional
     sampling_percentage: 10
 ```
 
@@ -62,9 +61,6 @@ otel-col.yamlの以下のprocessorsのほうを有効にします。
 
 ```
   tail_sampling:
-    # decision_wait: 30s
-    decision_wait: 10s
-    # num_traces: 50000
     policies:
       - name: error-spans
         type: status_code
@@ -76,7 +72,6 @@ otel-col.yamlの以下のprocessorsのほうを有効にします。
           sampling_percentage: 40
 ```
 
-decision_waitは蓄積して判断するまでの時間、num_tracesは最大格納可能なトレース数です。
 policiesには配列で順に評価していくポリシーを設定します。最初のポリシーに適合したトレースは、次のポリシーの評価に行くことなく抽出されます。
 
 ここでは2つのポリシーを用意しています。
