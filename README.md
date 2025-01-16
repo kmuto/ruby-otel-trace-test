@@ -6,7 +6,7 @@ RubyのOpenTelemetryトレース実装およびヘッドベースサンプリン
 OpenTelemetry Collectorがまだないか、この実験で使用するコンポーネントを含んでいない場合はビルドする必要があります（Go環境が必要です）。
 
 ```
-$ go install github.com/open-telemetry/opentelemetry-collector-builder/cmd/otelcol-builder@v0.116.0
+$ go install github.com/open-telemetry/opentelemetry-collector-builder@latest
 $ builder --config manifest.yaml
 ```
 
